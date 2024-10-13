@@ -1,0 +1,292 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
+
+.game-info {
+  margin-bottom: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50px; /* Space to the right of the current player text */
+}
+
+.board-container {
+  position: relative;
+  touch-action: none;
+}
+
+.side-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 50px; /* Space to the left of the reset button and game title */
+}
+
+.game-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.reset-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .game-container {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .side-info {
+    order: 2;
+    margin-top: 0;
+  }
+
+  .board-container {
+    order: 1;
+  }
+
+  .game-info {
+    order: 0;
+    margin-bottom: 0;
+  }
+}
+
+.current-player {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.current-player .r {
+  color: red;
+  font-weight: bold;
+}
+
+.current-player .y {
+  color: #1e3c72; /* Changed from #FFD700 to #1e3c72 */
+  font-weight: bold;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px; /* Slightly reduced gap to accommodate larger cells */
+  background-color: #808080;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.column {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.cell {
+  width: 80px;  /* Increased from 70px */
+  height: 80px; /* Increased from 70px */
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.cell::after {
+  content: '';
+  position: absolute;
+  width: 95%;  /* Increased from 90% */
+  height: 95%; /* Increased from 90% */
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cell.red::after {
+  background-color: red;
+}
+
+.cell.blue::after {
+  background-color: blue;
+}
+
+.piece {
+  width: 60px;  /* Increased from 40px */
+  height: 60px; /* Increased from 40px */
+  border-radius: 50%;
+}
+
+.r {
+  background-color: red;
+}
+
+.y {
+  background-color: #1e3c72; /* Changed from #FFD700 to #1e3c72 */
+}
+
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.winner {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #4CAF50;
+}
+
+.hand-icon {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 48px;  /* Increased from 40px (20% larger) */
+  height: 48px; /* Increased from 40px (20% larger) */
+  background-image: url('../public/hand-icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1000;
+  transition: transform 0.1s ease-out;
+}
+
+.player-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.player-indicator.r {
+  background-color: red;
+}
+
+.player-indicator.b {
+  background-color: blue;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .cell {
+    width: 60px;  /* Smaller cells for mobile */
+    height: 60px;
+  }
+
+  .piece {
+    width: 40px;  /* Adjust piece size */
+    height: 40px;
+  }
+
+  .game-title, .current-player {
+    font-size: 18px; /* Reduce font size for mobile */
+  }
+
+  .reset-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+/* iPad/Tablet optimization */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .game-container {
+    flex-direction: column; /* Centered for tablets */
+    align-items: center;
+  }
+
+  .cell {
+    width: 70px;  /* Slightly smaller for tablets */
+    height: 70px;
+  }
+
+  .piece {
+    width: 50px;  /* Adjust size for iPad */
+    height: 50px;
+  }
+
+  .game-title, .current-player {
+    font-size: 22px; /* Keep readability on tablets */
+  }
+
+  .reset-button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .side-info {
+    margin-left: 30px; /* Less margin for iPads */
+  }
+
+  .game-info {
+    margin-right: 30px; /* Same for current player text */
+  }
+}
+
+
+
+
+
+
